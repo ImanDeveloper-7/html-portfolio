@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Iman Zabihi's portfolio — iOS and Flutter developer specializing in polished mobile applications, Bluetooth integrations, and production app delivery." />
+  <meta name="theme-color" content="#0a1020" />
+  <title>Iman Zabihi | Mobile App Developer</title>
+  <style>
+    :root {
+      --bg: #0a1020;
+      --surface: #111a30;
+      --surface-light: #16223b;
+      --ink: #f5f8ff;
+      --muted: #a2b1c8;
+      --line: rgba(194, 215, 255, 0.13);
+      --mint: #8af2c4;
+      --blue: #90b8ff;
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    a:focus-visible { outline: 3px solid var(--mint); outline-offset: 5px; border-radius: 4px; }
+    .container { width: min(1120px, calc(100% - 44px)); margin-inline: auto; }
+    .site-header { border-bottom: 1px solid var(--line); position: relative; z-index: 2; }
+    .nav { min-height: 82px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { font-size: 1.12rem; letter-spacing: -0.035em; font-weight: 800; white-space: nowrap; }
+    .brand span { color: var(--mint); }
+    .nav-links { display: flex; gap: 28px; align-items: center; flex-wrap: wrap; }
+    .nav-links a { color: var(--muted); font-size: .92rem; font-weight: 600; transition: color .2s; }
+    .nav-links a:hover { color: var(--mint); }
+    .nav-links a:last-child { color: var(--bg); background: var(--mint); padding: 10px 17px; border-radius: 999px; }
+    .nav-links a:last-child:hover { background: #bcffdf; }
+
+    .hero { position: relative; overflow: hidden; padding: 104px 0 110px; }
+    .hero::before {
+      content: ""; position: absolute; width: 600px; height: 600px; border-radius: 50%;
+      right: -260px; top: -240px; background: radial-gradient(circle, rgba(104,145,255,.20), transparent 68%);
+      pointer-events: none;
+    }
+    .hero-grid { display: grid; grid-template-columns: 1.12fr .88fr; align-items: center; gap: 50px; }
+    .eyebrow { color: var(--mint); font-weight: 700; text-transform: uppercase; letter-spacing: .16em; font-size: .75rem; margin: 0 0 20px; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { font-size: clamp(3rem, 5.8vw, 5.65rem); line-height: 1.07; letter-spacing: -.065em; margin-bottom: 26px; }
+    h1 span { color: var(--mint); }
+    .hero-copy { color: var(--muted); font-size: 1.14rem; max-width: 590px; margin-bottom: 32px; }
+    .button-row { display: flex; gap: 13px; flex-wrap: wrap; }
+    .button { display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 13px 21px; border-radius: 999px; font-weight: 750; font-size: .94rem; border: 1px solid var(--line); transition: transform .2s, background .2s; }
+    .button:hover { transform: translateY(-2px); }
+    .button-primary { background: var(--mint); color: #0b1b22; border-color: var(--mint); }
+    .button-secondary { background: rgba(255,255,255,.045); color: var(--ink); }
+    .hero-note { color: var(--muted); font-size: .85rem; margin-top: 26px; }
+
+    .hero-visual { min-height: 420px; display: grid; place-items: center; position: relative; }
+    .visual-glow { position: absolute; width: 310px; height: 310px; border-radius: 50%; background: #71caff; filter: blur(105px); opacity: .17; }
+    .device {
+      position: relative; width: 210px; height: 390px; border-radius: 39px;
+      border: 7px solid #3e4c62; background: #07101d;
+      box-shadow: 20px 35px 75px rgba(0,0,0,.45), inset 0 0 0 1px #71849c;
+      transform: rotate(10deg); padding: 23px 15px; overflow: hidden;
+    }
+    .device::before { content: ""; position: absolute; width: 68px; height: 14px; border-radius: 0 0 12px 12px; background: #3e4c62; top: 0; left: 50%; transform: translateX(-50%); }
+    .device-title { color: #c5d3e9; font-size: .62rem; letter-spacing: .15em; text-transform: uppercase; margin-top: 13px; }
+    .device-circle { width: 135px; height: 135px; border: 2px solid rgba(138,242,196,.28); background: radial-gradient(circle at 50% 35%, rgba(138,242,196,.25), rgba(15,31,47,.9) 65%); border-radius: 50%; margin: 26px auto 20px; display: grid; place-items: center; }
+    .device-circle b { font-size: 2.8rem; font-weight: 400; color: var(--mint); }
+    .device-line { height: 8px; border-radius: 5px; margin: 13px auto; background: #26374c; width: 85%; }
+    .device-line.short { width: 55%; background: #456f68; }
+    .floating-card { position: absolute; background: #192941; border: 1px solid #3d5471; box-shadow: 0 20px 50px rgba(0,0,0,.3); padding: 15px 18px; border-radius: 18px; color: var(--ink); font-size: .82rem; line-height: 1.45; }
+    .floating-card strong { display: block; font-size: .9rem; }
+    .floating-card small { color: var(--muted); }
+    .floating-card.one { left: 0; top: 80px; transform: rotate(-7deg); }
+    .floating-card.two { right: -5px; bottom: 64px; transform: rotate(5deg); }
+    .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--mint); margin-right: 6px; }
+
+    .section { padding: 92px 0; }
+    .section-alt { background: linear-gradient(180deg, rgba(20,32,53,.65), rgba(15,25,44,.55)); border-block: 1px solid var(--line); }
+    .section-top { display: flex; align-items: end; justify-content: space-between; gap: 25px; margin-bottom: 34px; }
+    .section-label { text-transform: uppercase; letter-spacing: .16em; font-size: .73rem; font-weight: 800; color: var(--mint); margin-bottom: 10px; }
+    h2 { font-size: clamp(2rem, 3.7vw, 3.2rem); letter-spacing: -.05em; line-height: 1.15; margin-bottom: 10px; }
+    .section-intro { color: var(--muted); max-width: 620px; margin: 0; }
+    .project-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 20px; }
+    .project-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; transition: transform .2s, border-color .2s; }
+    .project-card:hover { transform: translateY(-5px); border-color: rgba(138,242,196,.47); }
+    .project-art { min-height: 164px; padding: 24px; position: relative; display: flex; align-items: end; justify-content: space-between; overflow: hidden; }
+    .project-art::before { content: ""; width: 190px; height: 190px; border: 1px solid rgba(255,255,255,.2); border-radius: 50%; position: absolute; right: -30px; top: -65px; }
+    .project-art::after { content: ""; width: 115px; height: 115px; border: 1px solid rgba(255,255,255,.16); border-radius: 50%; position: absolute; right: 9px; top: -26px; }
+    .project-art .mark { font-size: 2.6rem; letter-spacing: -.08em; font-weight: 850; line-height: 1; position: relative; z-index: 1; }
+    .project-art .number { font-size: .7rem; font-weight: 800; letter-spacing: .15em; opacity: .8; position: relative; z-index: 1; }
+    .art-a { background: linear-gradient(135deg, #284e57, #0c6664); }
+    .art-b { background: linear-gradient(135deg, #5f3967, #c36d78); }
+    .art-c { background: linear-gradient(135deg, #315778, #4588a2); }
+    .art-d { background: linear-gradient(135deg, #554976, #8877c4); }
+    .art-e { background: linear-gradient(135deg, #4d6b43, #88a05b); }
+    .art-f { background: linear-gradient(135deg, #6d4d3e, #b2795f); }
+    .project-content { padding: 25px; display: flex; flex-direction: column; align-items: start; flex: 1; }
+    .project-content h3 { font-size: 1.13rem; line-height: 1.35; letter-spacing: -.02em; margin-bottom: 10px; }
+    .project-content p { color: var(--muted); font-size: .91rem; margin-bottom: 20px; flex: 1; }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 21px; }
+    .tag { color: #cad8eb; background: #1c2a43; border: 1px solid rgba(199,221,255,.08); border-radius: 999px; padding: 5px 9px; font-size: .68rem; font-weight: 700; }
+    .project-link { color: var(--mint); font-size: .87rem; font-weight: 800; }
+    .project-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+    .about-grid { display: grid; grid-template-columns: 1fr 1.05fr; gap: 70px; }
+    .about-copy { color: var(--muted); font-size: 1.02rem; }
+    .skills { display: flex; flex-wrap: wrap; gap: 11px; align-content: start; }
+    .skill { padding: 12px 17px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface-light); font-size: .86rem; font-weight: 700; }
+    .contact-box { padding: 47px; border-radius: 26px; background: linear-gradient(115deg,#254a53,#132943 65%,#20364d); border: 1px solid rgba(138,242,196,.22); display: flex; align-items: center; justify-content: space-between; gap: 25px; }
+    .contact-box h2 { margin: 0 0 12px; }
+    .contact-box p { color: #cbd9e6; margin: 0; max-width: 570px; }
+    .contact-box .button { flex-shrink: 0; }
+    .site-footer { padding: 30px 0 44px; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; color: var(--muted); font-size: .83rem; }
+    .footer-inner a { color: var(--mint); }
+
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero { padding: 72px 0 85px; }
+      .hero-visual { min-height: 370px; }
+      .project-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .about-grid { grid-template-columns: 1fr; gap: 30px; }
+    }
+    @media (max-width: 600px) {
+      .container { width: min(100% - 32px, 1120px); }
+      .nav { padding: 18px 0; align-items: start; flex-direction: column; gap: 14px; }
+      .nav-links { gap: 17px; }
+      .nav-links a { font-size: .83rem; }
+      .nav-links a:last-child { padding: 7px 12px; }
+      .hero { padding: 64px 0; }
+      .hero-visual { min-height: 335px; transform: scale(.85); margin: -22px 0; }
+      .floating-card.one { left: -15px; }
+      .floating-card.two { right: -16px; }
+      .section { padding: 65px 0; }
+      .project-grid { grid-template-columns: 1fr; }
+      .project-art { min-height: 145px; }
+      .contact-box { padding: 27px; flex-direction: column; align-items: start; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav container" aria-label="Main navigation">
+      <a class="brand" href="#home">Iman<span>.</span> Zabihi</a>
+      <div class="nav-links">
+        <a href="#work">Projects</a>
+        <a href="#about">About &amp; Skills</a>
+        <a href="#personal">My Apps</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow">iOS Developer · Flutter Developer</p>
+          <h1>Hi, I'm Iman.<br />I build <span>mobile experiences.</span></h1>
+          <p class="hero-copy">I'm Iman Zabihi, a mobile application developer based in Kuala Lumpur, Malaysia. I work with Swift, SwiftUI, UIKit, and Flutter to bring reliable, intuitive applications from idea to release.</p>
+          <div class="button-row">
+            <a class="button button-primary" href="#work">Explore my work <span aria-hidden="true">↗</span></a>
+            <a class="button button-secondary" href="#contact">Get in touch</a>
+          </div>
+          <p class="hero-note"><span class="status-dot" aria-hidden="true"></span>Available for mobile engineering opportunities and collaborations</p>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="visual-glow"></div>
+          <div class="device">
+            <div class="device-title">Connected experience</div>
+            <div class="device-circle"><b>⌁</b></div>
+            <div class="device-line"></div>
+            <div class="device-line short"></div>
+            <div class="device-line"></div>
+            <div class="device-line short"></div>
+          </div>
+          <div class="floating-card one"><strong>Swift + SwiftUI</strong><small>Native iOS development</small></div>
+          <div class="floating-card two"><strong><span class="status-dot"></span>BLE &amp; SDKs</strong><small>Connected devices</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="work">
+      <div class="container">
+        <div class="section-top">
+          <div>
+            <p class="section-label">Selected professional work</p>
+            <h2>Enterprise projects</h2>
+            <p class="section-intro">A selection of commercial applications I've worked on for brands and organizations.</p>
+          </div>
+        </div>
+        <div class="project-grid">
+          <article class="project-card">
+            <div class="project-art art-a"><span class="mark">P</span><span class="number">01 / WATCH</span></div>
+            <div class="project-content"><h3>Pininfarina Hybrid Watch</h3><p>Companion app development, including BLE scanning and pairing, wearable SDK integration, API connectivity, authentication, UI work, and release support.</p><div class="tag-row"><span class="tag">Swift / iOS</span><span class="tag">Flutter</span><span class="tag">Bluetooth LE</span></div><a class="project-link" href="https://apps.apple.com/app/id1601068610" target="_blank" rel="noopener noreferrer" aria-label="View Pininfarina Hybrid Watch on the App Store">View on App Store ↗</a></div>
+          </article>
+          <article class="project-card">
+            <div class="project-art art-b"><span class="mark">M</span><span class="number">02 / WELLNESS</span></div>
+            <div class="project-content"><h3>Mydason Hair &amp; Scalp Wellness</h3><p>A mobile application project in the hair and scalp wellness space.</p><div class="tag-row"><span class="tag">Mobile App</span><span class="tag">Wellness</span></div><a class="project-link" href="https://apps.apple.com/app/id1615523885" target="_blank" rel="noopener noreferrer" aria-label="View Mydason on the App Store">View on App Store ↗</a></div>
+          </article>
+          <article class="project-card">
+            <div class="project-art art-c"><span class="mark">H</span><span class="number">03 / ENTERPRISE</span></div>
+            <div class="project-content"><h3>The H-Circle</h3><p>A mobile application project developed for Hunza Group.</p><div class="tag-row"><span class="tag">Mobile App</span><span class="tag">Hunza Group</span></div><a class="project-link" href="https://apps.apple.com/app/id1552689841" target="_blank" rel="noopener noreferrer" aria-label="View The H-Circle on the App Store">View on App Store ↗</a></div>
+          </article>
+          <article class="project-card">
+            <div class="project-art art-d"><span class="mark">eC</span><span class="number">04 / PROPERTY</span></div>
+            <div class="project-content"><h3>eConnexion</h3><p>A professional mobile application project associated with Knight Frank.</p><div class="tag-row"><span class="tag">Mobile App</span><span class="tag">Property</span></div><a class="project-link" href="https://apps.apple.com/app/id6443930462" target="_blank" rel="noopener noreferrer" aria-label="View eConnexion on the App Store">View on App Store ↗</a></div>
+          </article>
+          <article class="project-card">
+            <div class="project-art art-e"><span class="mark">MOG</span><span class="number">05 / EYE CARE</span></div>
+            <div class="project-content"><h3>MOG iCare4U</h3><p>A mobile application in the eye-care services sector.</p><div class="tag-row"><span class="tag">Mobile App</span><span class="tag">Healthcare</span></div><a class="project-link" href="https://apps.apple.com/app/id6746001643" target="_blank" rel="noopener noreferrer" aria-label="View MOG iCare4U on the App Store">View on App Store ↗</a></div>
+          </article>
+          <article class="project-card">
+            <div class="project-art art-f"><span class="mark">SEI</span><span class="number">06 / ENTERPRISE</span></div>
+            <div class="project-content"><h3>SEIBUKL</h3><p>A mobile application included in my professional development portfolio.</p><div class="tag-row"><span class="tag">Mobile App</span><span class="tag">Enterprise</span></div><a class="project-link" href="https://apps.apple.com/app/id6471658677" target="_blank" rel="noopener noreferrer" aria-label="View SEIBUKL on the App Store">View on App Store ↗</a></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="personal">
+      <div class="container">
+        <div class="section-top">
+          <div>
+            <p class="section-label">Designed &amp; developed independently</p>
+            <h2>My App Store apps</h2>
+            <p class="section-intro">Personal releases exploring practical utilities, AI-assisted creativity, and financial tools.</p>
+          </div>
+        </div>
+        <div class="project-grid">
+          <article class="project-card">
+            <div class="project-art art-c"><span class="mark">✦</span><span class="number">UTILITY</span></div>
+            <div class="project-content"><h3>Flashlight + Magnifying Glass</h3><p>A practical everyday utility combining light and magnification features.</p><div class="tag-row"><span class="tag">iOS</span><span class="tag">Utility</span></div><a class="project-link" href="https://apps.apple.com/app/id6742403779" target="_blank" rel="noopener noreferrer" aria-label="View Flashlight and Magnifying Glass on the App Store">View on App Store ↗</a></div>
+          </article>
+          <article class="project-card">
+            <div class="project-art art-d"><span class="mark">#AI</span><span class="number">CREATOR TOOLS</span></div>
+            <div class="project-content"><h3>Caption &amp; Hashtag Expert AI</h3><p>An AI-assisted tool for generating social-media captions and hashtag ideas, with local data storage using SwiftData.</p><div class="tag-row"><span class="tag">AI</span><span class="tag">SwiftData</span></div><a class="project-link" href="https://apps.apple.com/app/id6742775633" target="_blank" rel="noopener noreferrer" aria-label="View Caption and Hashtag Expert AI on the App Store">View on App Store ↗</a></div>
+          </article>
+          <article class="project-card">
+            <div class="project-art art-b"><span class="mark">✳</span><span class="number">CREATIVE AI</span></div>
+            <div class="project-content"><h3>Tattoo Design Generator – AI</h3><p>An AI-inspired creative tool for exploring tattoo design concepts.</p><div class="tag-row"><span class="tag">AI</span><span class="tag">Design</span></div><a class="project-link" href="https://apps.apple.com/app/id6743697549" target="_blank" rel="noopener noreferrer" aria-label="View Tattoo Design Generator AI on the App Store">View on App Store ↗</a></div>
+          </article>
+          <article class="project-card">
+            <div class="project-art art-a"><span class="mark">%</span><span class="number">FINANCE</span></div>
+            <div class="project-content"><h3>Mortgage Calculator Plus</h3><p>A utility for mortgage calculations and financial planning.</p><div class="tag-row"><span class="tag">iOS</span><span class="tag">Finance</span></div><a class="project-link" href="https://apps.apple.com/app/id6741787077" target="_blank" rel="noopener noreferrer" aria-label="View Mortgage Calculator Plus on the App Store">View on App Store ↗</a></div>
+          </article>
+          <article class="project-card">
+            <div class="project-art art-e"><span class="mark">↗</span><span class="number">FINANCE</span></div>
+            <div class="project-content"><h3>Cashflow Forecast – Money.io</h3><p>A personal finance app centered on planning and forecasting cash flow.</p><div class="tag-row"><span class="tag">iOS</span><span class="tag">Finance</span></div><a class="project-link" href="https://apps.apple.com/app/id6478570258" target="_blank" rel="noopener noreferrer" aria-label="View Cashflow Forecast Money.io on the App Store">View on App Store ↗</a></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="about">
+      <div class="container about-grid">
+        <div>
+          <p class="section-label">A little about me</p>
+          <h2>Developer, problem solver, product thinker.</h2>
+          <p class="about-copy">I have 6+ years of iOS development experience, with a broader background in software engineering. My work spans native iOS interfaces, cross-platform Flutter features, API integrations, authentication, connected devices, debugging, and App Store delivery.</p>
+          <p class="about-copy">I also run <a class="project-link" href="https://appcaretech.com" target="_blank" rel="noopener noreferrer">AppCare Technologies ↗</a>, providing mobile app development, rescue, modernization, and integration services.</p>
+        </div>
+        <div>
+          <p class="section-label">Technical toolkit</p>
+          <div class="skills" aria-label="Technical skills">
+            <span class="skill">Swift</span><span class="skill">SwiftUI</span><span class="skill">UIKit</span><span class="skill">Objective-C</span><span class="skill">Flutter</span><span class="skill">Dart</span><span class="skill">Bluetooth LE</span><span class="skill">SDK Integration</span><span class="skill">REST APIs</span><span class="skill">Social Login / OTP</span><span class="skill">SwiftData</span><span class="skill">Debugging</span><span class="skill">App Store Deployment</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="contact-box">
+          <div>
+            <p class="section-label">Let's build something useful</p>
+            <h2>Have an app idea or an opportunity?</h2>
+            <p>I'm happy to talk about mobile app development, engineering roles, and collaboration opportunities.</p>
+          </div>
+          <a class="button button-primary" href="https://appcaretech.com" target="_blank" rel="noopener noreferrer">Visit AppCare Technologies ↗</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner container">
+      <span>© 2026 Iman Zabihi. Built with care.</span>
+      <span>Kuala Lumpur, Malaysia · <a href="#home">Back to top ↑</a></span>
+    </div>
+  </footer>
+</body>
+</html>
